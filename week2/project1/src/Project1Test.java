@@ -37,5 +37,9 @@ public class Project1Test {
                 System.out.println(name + " is the tallest youngster");
             System.out.println("=================================================");
         }
+        System.out.println(roster1.removePlayer(0).getName() + " removed");
+        System.out.println("new size: " + roster1.getSize());
+        System.out.println("New average age: " + roster1.getAverageAge());
+        System.out.println("New tallest Youngter: " + roster1.getTallYoungster().getName());
     }
 }

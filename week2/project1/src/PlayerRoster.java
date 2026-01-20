@@ -94,7 +94,7 @@ public class PlayerRoster {
     /** removes a player at a specific index */
     public Player removePlayer(int index) {
         Player player = roster.get(index);
-        ageSum -= player.toInches();
+        ageSum -= player.getAge();
         roster.remove(index);
         setAverageAge();
         setTallYoungster();
