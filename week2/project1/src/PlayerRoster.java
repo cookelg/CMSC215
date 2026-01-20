@@ -50,9 +50,9 @@ public class PlayerRoster {
         }
     }
 
-    /** returns a String for the tallest Player who's age <= average age */
-    public String getTallYoungster() {
-        return tallYoungster.toString();
+    /** returns the tallest Player who's age <= average age */
+    public Player getTallYoungster() {
+        return tallYoungster;
     }
 
     /** instantiates a new player object and adds it to the roster */

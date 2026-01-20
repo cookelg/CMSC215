@@ -7,8 +7,7 @@
  * - Player.java
  * - This class stores all relevant player information
  * - The constructor instantiates a new height object which is stored in the
- * height
- * data field
+ * height data field
  * ===================================================================================
  */
 public class Player {
