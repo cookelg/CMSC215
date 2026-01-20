@@ -37,6 +37,7 @@
 ehthumbs.db
 Thumbs.db
 
-# Scratch files #
+# Scratch files, test files #
 #################
 Scratch.java
+test*.txt

@@ -1,3 +1,17 @@
+
+/** 
+===================================================================================
+- CMSC215
+- Project 1 Player Roster Program
+- Lawrence Cooke
+
+- PlayerRoster.java
+- This class uses an ArrayList initialized for Player objects
+- As players are being added to the roster, private methods in this class will 
+  automatically set the values for average age and check for the tallest player 
+  who's age is equal to or less than the average age
+===================================================================================
+*/
 import java.util.ArrayList;
 
 public class PlayerRoster {

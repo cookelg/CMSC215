@@ -1,3 +1,15 @@
+/**
+ * ===================================================================================
+ * - CMSC215
+ * - Project 1 Player Roster Program
+ * - Lawrence Cooke
+ * 
+ * - Height.java
+ * - This class stores player height information
+ * - The constructor will normalize inputs into feet and inches
+ * - for example: "5 14" will be stored as "6 2"
+ * ===================================================================================
+ */
 public class Height {
     private int feet;
     private int inches;
