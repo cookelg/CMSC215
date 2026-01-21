@@ -40,4 +40,8 @@ Thumbs.db
 # Scratch files, test files #
 #################
 Scratch.java
-# test*.txt
+test*.txt
+*.ods
+*.odt
+*.docx
+
