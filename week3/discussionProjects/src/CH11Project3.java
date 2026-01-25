@@ -1,3 +1,4 @@
+
 /**
  * Write a program that prompts a user to enter an integer m and find the
  * smallest
@@ -15,3 +16,8 @@
  * >>the smallest integer n for m*n to be a perfect square is 15
  * >>m*n is 22500
  */
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class CH11Project3 {
+}
