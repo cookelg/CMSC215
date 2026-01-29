@@ -44,4 +44,5 @@ test*.txt
 *.ods
 *.odt
 *.docx
+*.pdf
 
