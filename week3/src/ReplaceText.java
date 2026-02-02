@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class ReplaceText {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         // check the command line parameter usage
         if (args.length != 4) {
             System.out.println(
