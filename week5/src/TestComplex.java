@@ -13,6 +13,8 @@ public class TestComplex {
         double d = input.nextDouble();
         Complex c2 = new Complex(c, d);
 
+        input.close();
+
         System.out.println("(" + c1 + ")" + " + " + "(" + c2 + ")" + " = " + c1.add(c2));
         System.out.println("(" + c1 + ")" + " - " + "(" + c2 + ")" + " = " + c1.subtract(c2));
         System.out.println("(" + c1 + ")" + " * " + "(" + c2 + ")" + " = " + c1.multiply(c2));
@@ -21,8 +23,8 @@ public class TestComplex {
 
         Complex c3 = (Complex) c1.clone();
         System.out.println(c1 == c3);
-        System.out.println(c3.getRealPart());
-        System.out.println(c3.getImaginaryPart());
+        System.out.println(c3.getReal());
+        System.out.println(c3.getImaginary());
         Complex c4 = new Complex(4, -0.5);
         Complex[] list = { c1, c2, c3, c4 };
         java.util.Arrays.sort(list);

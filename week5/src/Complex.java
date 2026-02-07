@@ -56,11 +56,51 @@ public class Complex implements Cloneable, Comparable<Complex> {
         double b = this.getImaginary();
         double c = c2.getReal();
         double d = c2.getImaginary();
-        double real = (a * c + b * d) / c * c + d * d;
-        double imaginary = (b * c - a * d) / c * c + d * d;
-        return new Complex(a, b);
+        double real = (a * c + b * d) / (c * c + d * d);
+        double imaginary = (b * c - a * d) / (c * c + d * d);
+        return new Complex(real, imaginary);
     }
+
     /** Abslolute value method */
-    /** Cloneable */
-    /** Comparable */
+    public double abs() {
+        double a = this.getReal();
+        double b = this.getImaginary();
+        return Math.sqrt(a * a + b * b);
+    }
+
+    /** Overridden Cloneable method - executes a shallow clone */
+    @Override
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException ex) {
+            return null;
+        }
+    }
+
+    /** Overriden comparable method */
+    @Override
+    public int compareTo(Complex o) {
+        if (abs() > o.abs())
+            return 1;
+        else if (abs() < o.abs())
+            return -1;
+        else
+            return 0;
+
+    }
+
+    /**
+     * ToString - returns "a + bi" if b is positive, "a - bi" if b is negative,
+     * and "a" if b is zero
+     */
+    @Override
+    public String toString() {
+        if (b > 0)
+            return String.format("%.2f + %.2fi", a, b);
+        else if (b < 0) {
+            return String.format("%.2f - %.2fi", a, Math.abs(b));
+        } else
+            return String.format("%.2f", a);
+    }
 }
