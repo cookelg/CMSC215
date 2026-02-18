@@ -11,6 +11,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+/**
+ * Date: 2026-02-17
+ *
+ * - Trip cost calculator JavaFX application that takes user input through text
+ * fields and combo boxes to calculate the total cost of fuel, hotel, food, and
+ * attractions
+ * - input fields include trip distance, gasoline cost, gas mileage, number of
+ * days,
+ * hotel cost per day, food cost per day, and total cost of attractions
+ * - The user can also specify the linear units of their trip distance, the
+ * volume
+ * units of their fuel price, and either miles/gallon or km/liters
+ *
+ * @author Lawrence Cooke
+ */
 public class Project3 extends Application {
     private TextField tfDistance = new TextField();
     private TextField tfGasCost = new TextField();
@@ -21,18 +36,20 @@ public class Project3 extends Application {
     private TextField tfAttractions = new TextField();
     private TextField tfTotalTripCost = new TextField();
     private Button btCalculate = new Button("Calculate");
+    // String arrays contain the values seen inside the combo boxes
     private String[] linearUnits = { "miles", "kilometers" };
     private String[] volumeUnits = { "dollars/gal", "dollars/liter" };
-    private String[] fuelRateUnits = { "miles/galllon", "kilometers/liter" };
+    private String[] fuelRateUnits = { "miles/gallon", "kilometers/liter" };
     private ComboBox<String> cboLinearUnits = new ComboBox<>();
     private ComboBox<String> cboVolumeUnits = new ComboBox<>();
     private ComboBox<String> cboFuelRateUnits = new ComboBox<>();
-    private final double KILOMETERS_PER_MILE = 1.609347;
-    private final double LITERS_PER_GALLON = 3.78541178;
+    // constants contain the values used to convert mi to km and gal to liters
+    private static final double KILOMETERS_PER_MILE = 1.609347;
+    private static final double LITERS_PER_GALLON = 3.78541178;
 
     @Override
     public void start(Stage primaryStage) {
-        // Create UI
+        // Create UI, utilizing a grid pane
         GridPane gridPane = new GridPane();
         gridPane.setHgap(5);
         gridPane.setVgap(5);
@@ -53,6 +70,7 @@ public class Project3 extends Application {
         gridPane.add(tfFoodCost, 1, 5);
         gridPane.add(new Label("Attractions:"), 0, 6);
         gridPane.add(tfAttractions, 1, 6);
+        // calculate button located above the total trip cost
         gridPane.add(btCalculate, 1, 7);
         gridPane.add(new Label("Total Trip Cost:"), 0, 8);
         gridPane.add(tfTotalTripCost, 1, 8);
@@ -70,11 +88,11 @@ public class Project3 extends Application {
         tfTotalTripCost.setEditable(false);
         GridPane.setHalignment(btCalculate, HPos.RIGHT);
         cboLinearUnits.setPrefWidth(100);
-        cboLinearUnits.setValue(linearUnits[0]);
+        cboLinearUnits.setValue(linearUnits[1]);
         cboVolumeUnits.setPrefWidth(100);
-        cboVolumeUnits.setValue(volumeUnits[0]);
+        cboVolumeUnits.setValue(volumeUnits[1]);
         cboFuelRateUnits.setPrefWidth(100);
-        cboFuelRateUnits.setValue(fuelRateUnits[0]);
+        cboFuelRateUnits.setValue(fuelRateUnits[1]);
 
         ObservableList<String> items1 = FXCollections.observableArrayList(linearUnits);
         cboLinearUnits.getItems().addAll(items1);
@@ -83,7 +101,9 @@ public class Project3 extends Application {
         ObservableList<String> items3 = FXCollections.observableArrayList(fuelRateUnits);
         cboFuelRateUnits.getItems().addAll(items3);
 
+        // utilizing css style to shrink the font size of the whole pane.
         gridPane.setStyle("-fx-font-size: 10");
+
         // Process events
         btCalculate.setOnAction(e -> calculateTotal());
 
@@ -94,6 +114,12 @@ public class Project3 extends Application {
         primaryStage.show(); // Display the stage
     }
 
+    /**
+     * - calculateTotal class method is used to handle the event fired from the user
+     * clicking the "Calculate" button with the mouse
+     * - if the user chooses any imperial units from the combo boxes, they will be
+     * converted to metric
+     */
     private void calculateTotal() {
         // Get values from text fields
         double distance = Double.parseDouble(tfDistance.getText());
@@ -102,16 +128,29 @@ public class Project3 extends Application {
         int numDays = Integer.parseInt(tfNumDays.getText());
         double hotelCost = Double.parseDouble(tfHotelCost.getText());
         double foodCost = Double.parseDouble(tfFoodCost.getText());
-        double Attractions = Double.parseDouble(tfAttractions.getText());
+        double attractions = Double.parseDouble(tfAttractions.getText());
+        String linearUnit = cboLinearUnits.getValue();
+        String volumeUnit = cboVolumeUnits.getValue();
+        String fuelRateUnit = cboFuelRateUnits.getValue();
 
-        // TODO
-        // create the trip class
-        // find a way to apply the combo box choices
-        //
-        //
-        TripCost trip = new TripCost(distance, gasCost, gasMileage, numDays, hotelCost, foodCost, Attractions);
+        // These three control statements will ensure that all units will be metric
+        // before they are passed to the constructor
+        if (linearUnit.equals("miles"))
+            distance *= KILOMETERS_PER_MILE;
+        if (volumeUnit.equals("dollars/gal"))
+            gasCost *= LITERS_PER_GALLON;
+        if (fuelRateUnit.equals("miles/gallon"))
+            gasMileage *= (LITERS_PER_GALLON / KILOMETERS_PER_MILE);
 
-        // Display monthly payment and total payment
+        // Print messages used to check the accuracy of the individual values
+        // System.out.println("distance " + distance);
+        // System.out.println("gas Cost " + gasCost);
+        // System.out.println("gas mileage " + gasMileage);
+
+        TripCost trip = new TripCost(distance, gasCost, gasMileage, numDays,
+                hotelCost, foodCost, attractions);
+
+        // Display the total Trip cost in the appropriate text field.
         tfTotalTripCost.setText(String.format("$%.2f",
                 trip.getTripCost()));
     }
