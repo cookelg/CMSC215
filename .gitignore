@@ -44,6 +44,7 @@ test*.txt
 *.odt
 *.docx
 *.pdf
+*.sh
 
 # Ignore Gradle project-specific cache directory
 .gradle
