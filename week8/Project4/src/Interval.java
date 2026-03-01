@@ -1,7 +1,21 @@
+/**
+ * Date: 2026-03-01
+ * - Generic class that contains two comparable objects as instance variables
+ * - The instance methods will detect if it is a subinterval of, or overlaps
+ * with another interval
+ * 
+ * @author Lawrence Cooke
+ **/
 public class Interval<E extends Comparable<E>> {
     private E intervalStart;
     private E intervalEnd;
 
+    /**
+     * Class Constructor
+     * 
+     * @param intervalStart Generic comparable object, indicates start of interval
+     * @param intervalEnd   Generic comparable object, indicates end of interval
+     **/
     public Interval(E intervalStart, E intervalEnd) {
         this.intervalStart = intervalStart;
         this.intervalEnd = intervalEnd;
@@ -15,6 +29,12 @@ public class Interval<E extends Comparable<E>> {
         return intervalEnd;
     }
 
+    /**
+     * Returns a boolean indicating if an object of the same type is within the
+     * interval
+     *
+     * @param obj Generic comparable object of the same type as the interval
+     **/
     public boolean within(E obj) {
         if (obj.compareTo(intervalStart) >= 0 && obj.compareTo(intervalEnd) <= 0)
             return true;
@@ -22,7 +42,12 @@ public class Interval<E extends Comparable<E>> {
             return false;
     }
 
-    // is this a subinterval of Interval<E>
+    /**
+     * Generic class method that determines whether this interval is a subinterval
+     * of another interval of the same type
+     *
+     * @param i Generic Interval of the same type as this interval
+     **/
     public boolean subinterval(Interval<E> i) {
         if (i.within(intervalStart) && i.within(intervalEnd))
             return true;
@@ -30,7 +55,12 @@ public class Interval<E extends Comparable<E>> {
             return false;
     }
 
-    // Does this overlap with Interval<E>
+    /**
+     * Generic class method that determines whether this interval overlaps another
+     * interval of the same type
+     *
+     * @param i Generic Interval of the same type as this interval
+     **/
     public boolean overlaps(Interval<E> i) {
         if (i.within(intervalStart) || i.within(intervalEnd))
             return true;
@@ -40,27 +70,6 @@ public class Interval<E extends Comparable<E>> {
 
     @Override
     public String toString() {
-        return intervalStart.toString() + " through " + intervalEnd.toString();
+        return "Start: " + intervalStart.toString() + " | End: " + intervalEnd.toString();
     }
-
-    public static void main(String[] args) {
-        Interval<Integer> interval1 = new Interval<>(1, 10);
-        Interval<Integer> interval2 = new Interval<>(2, 10);
-        Interval<Integer> interval3 = new Interval<>(1, 9);
-        Interval<Integer> interval4 = new Interval<>(10, 12);
-
-        System.out.println("is 2 within interval " + interval1.toString() + " ? "
-                + interval1.within(2));
-        System.out.println("is 11 within interval " + interval1.toString() + " ? "
-                + interval1.within(11));
-        System.out.println("is interval " + interval1.toString() + " a sub-interval of "
-                + interval2.toString() + "? " + interval1.subinterval(interval2));
-        System.out.println("is interval " + interval3.toString() + " a sub-interval of "
-                + interval1.toString() + "? " + interval3.subinterval(interval1));
-        System.out.println("does interval " + interval1.toString() + " overlap with "
-                + interval4.toString() + "? " + interval1.overlaps(interval4));
-        System.out.println("does interval " + interval3.toString() + " overlap with "
-                + interval4.toString() + "? " + interval3.overlaps(interval4));
-    }
-
 }
