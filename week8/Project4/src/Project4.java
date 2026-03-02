@@ -27,8 +27,7 @@ import javafx.stage.Stage;
  * - A message will display which interval time is in, and whether it is
  * contained in both intervals or none
  * - Text fields will display 12:00 AM to 12:00 PM by defaule for both intervals
- * and
- * 12:00 PM by default for the individual time
+ * and 12:00 PM by default for the individual time
  * 
  * @author Lawrence Cooke
  **/
